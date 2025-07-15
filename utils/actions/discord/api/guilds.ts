@@ -12,5 +12,4 @@ export async function fetchUserGuilds(accessToken: string) {
 
     const data = await response.json();
     return { success: true, data }
-    
 }

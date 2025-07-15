@@ -1,19 +1,34 @@
-import { testDatabaseConnection } from "@/utils/actions/test";
+import { ArrowRight, Shield } from "lucide-react";
+import { Button } from "@/components/index";
+import Link from "next/link";
 
 export default async function Home() {
-    const isConnected = await testDatabaseConnection();
-
     return (
         <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center">
-            {isConnected ? (
-                <h2 className="text-lg text-green-500">
-                    Banco de dados conectado com sucesso!
-                </h2>
-            ) : (
-                <h2 className="text-lg text-red-500">
-                    Banco de dados não conectado!
-                </h2>
-            )}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+                <Button
+                    asChild
+                    size="lg"
+                    className="text-lg px-8 py-6 purple-glow"
+                >
+                    <Link href="/login">
+                        Login
+                        <ArrowRight className="ml-2 w-5 h-5" />
+                    </Link>
+                </Button>
+
+                <Button
+                    asChild
+                    variant="outline"
+                    size="lg"
+                    className="text-lg px-8 py-6 border-primary/30 hover:border-primary bg-transparent"
+                >
+                    <Link href="/dashboard">
+                        Dashboard
+                        <Shield className="ml-2 w-5 h-5" />
+                    </Link>
+                </Button>
+            </div>
         </div>
     );
 }

@@ -67,189 +67,6 @@
   scrollbar-color: #1f2937 transparent;
 }
 
-/* Mobile-specific terminal fixes to prevent layout disruption */
-.mobile-terminal-wrapper {
-  position: relative;
-  z-index: 1;
-}
-
-.mobile-terminal-container {
-  max-width: 100%;
-  overflow: hidden;
-}
-
-.mobile-terminal-content {
-  height: 320px;
-}
-
-@media (max-width: 768px) {
-  .mobile-terminal-content {
-    height: 280px;
-  }
-
-  /* Ensure hero section maintains proper spacing */
-  .hero-section-mobile {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-
-  /* Fix any potential text positioning issues caused by terminal */
-  .hero-text-container {
-    position: relative;
-    z-index: 2;
-    margin-bottom: 2rem;
-  }
-
-  /* Prevent terminal from pushing text up */
-  .mobile-terminal-wrapper {
-    margin-top: 1rem;
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 640px) {
-  .mobile-terminal-content {
-    height: 260px;
-  }
-
-  /* Ensure proper text layout on small screens */
-  .hero-content-mobile {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
-  }
-}
-
-/* Matrix Effect Styles */
-.matrix-mode {
-  overflow: hidden;
-}
-
-.matrix-rain {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.matrix-column {
-  position: absolute;
-  top: -100%;
-  width: 20px;
-  height: 100vh;
-  animation: matrix-fall linear infinite;
-  font-family: "Courier New", monospace;
-  font-size: 14px;
-  color: #00ff00;
-  text-shadow: 0 0 5px #00ff00;
-}
-
-.matrix-char {
-  display: block;
-  opacity: 0;
-  animation: matrix-fade 0.5s ease-in-out infinite alternate;
-}
-
-@keyframes matrix-fall {
-  0% {
-    transform: translateY(-100vh);
-  }
-  100% {
-    transform: translateY(100vh);
-  }
-}
-
-@keyframes matrix-fade {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-/* Terminal Animations */
-@keyframes terminal-blink {
-  0%,
-  50% {
-    opacity: 1;
-  }
-  51%,
-  100% {
-    opacity: 0;
-  }
-}
-
-.terminal-cursor::after {
-  content: "▋";
-  animation: terminal-blink 1s infinite;
-  color: #00ff00;
-}
-
-/* Glitch Effect for Matrix Mode */
-.matrix-mode .hero-title {
-  animation: glitch 0.3s infinite;
-}
-
-@keyframes glitch {
-  0% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    transform: translate(-2px, -2px);
-  }
-  60% {
-    transform: translate(2px, 2px);
-  }
-  80% {
-    transform: translate(2px, -2px);
-  }
-  100% {
-    transform: translate(0);
-  }
-}
-
-/* Responsive adjustments for matrix effect */
-@media (max-width: 768px) {
-  .matrix-column {
-    width: 15px;
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 640px) {
-  .matrix-column {
-    width: 12px;
-    font-size: 10px;
-  }
-}
-
-/* Easter Egg Pulse Animation */
-@keyframes easter-pulse {
-  0%,
-  100% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-
-.easter-hint {
-  animation: easter-pulse 3s infinite;
-}
-
-/* Command Palette Integration */
-.command-palette-overlay {
-  backdrop-filter: blur(8px);
-}
-
 /* Smooth transitions for all interactive elements */
 * {
   transition: all 0.2s ease-in-out;
@@ -287,21 +104,130 @@ input:focus-visible {
   }
 }
 
-/* Terminal specific styles */
-.terminal-container {
-  font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Consolas", "Courier New", monospace;
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.2s ease-in-out;
 }
 
-/* Matrix mode body effects */
-.matrix-mode body {
-  background: #000;
-  color: #00ff00;
+.hover-lift:hover {
+  transform: translateY(-2px);
 }
 
-.matrix-mode .text-white {
-  color: #00ff00 !important;
+.purple-glow {
+  box-shadow: 0 0 20px hsl(262 83% 58% / 0.3);
 }
 
-.matrix-mode .text-purple-400 {
-  color: #00ff88 !important;
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounce 3s infinite;
+}
+
+/* New animations for enhanced UX */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-delayed {
+  animation: fadeIn 0.8s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-staggered {
+  animation: fadeIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s ease-out forwards;
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.animate-scale-in-delayed {
+  animation: scaleIn 0.8s ease-out 0.3s forwards;
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.animate-scale-in-staggered {
+  animation: scaleIn 0.6s ease-out forwards;
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive enhancements */
+@media (max-width: 768px) {
+  .animate-fade-in-staggered {
+    animation-delay: 0ms !important;
+  }
 }
