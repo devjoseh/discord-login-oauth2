@@ -1,6 +1,7 @@
 import User from "@/utils/models/User";
 import connectDB from "@/lib/mongodb";
 import { SignJWT } from "jose";
+import { logError } from "@/utils/functions/logError";
 
 interface CallbackResult {
     success: boolean;
@@ -30,7 +31,7 @@ export async function handleDiscordCallback(code: string | null): Promise<Callba
 
         const tokenData = await tokenResponse.json();
         if (!tokenData.access_token) {
-            console.error('Discord Token Error:', tokenData);
+            await logError('Discord Token Error', tokenData);
             return { success: false, error: 'TokenError' };
         }
 
@@ -73,7 +74,7 @@ export async function handleDiscordCallback(code: string | null): Promise<Callba
 
         return { success: true, sessionToken: sessionToken };
     } catch (error) {
-        console.error('Callback Logic Error:', error);
+        await logError('Callback Error', error);
         return { success: false, error: 'ServerError' };
     }
 }

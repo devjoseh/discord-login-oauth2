@@ -1,6 +1,5 @@
 import { handleDiscordCallback } from "@/utils/actions/discord/auth";
 import { NextRequest, NextResponse } from "next/server";
-import cookie from "cookie";
 
 export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
@@ -11,13 +10,13 @@ export async function GET(request: NextRequest) {
     if (result.success && result.sessionToken) {
         const response = NextResponse.redirect(new URL('/dashboard', request.url));
 
-        response.headers.set('Set-Cookie', cookie.serialize('sessionToken', result.sessionToken, {
+        response.cookies.set("sessionToken", result.sessionToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV !== 'development',
+            secure: process.env.NODE_ENV !== "development",
             maxAge: 60 * 60 * 24 * 7, // 7 dias
-            sameSite: 'lax',
-            path: '/',
-        }));
+            sameSite: "lax",
+            path: "/",
+        });
 
         return response;
     } else {

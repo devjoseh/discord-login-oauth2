@@ -9,10 +9,9 @@ const nextConfig: NextConfig = {
   },
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "**" },
+      { protocol: "https", hostname: "cdn.discordapp.com" },
     ],
-    dangerouslyAllowSVG: true,
-    unoptimized: true
+    dangerouslyAllowSVG: true
   }
 };
 
